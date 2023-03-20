@@ -3,10 +3,11 @@ import service from "../service";
 export const banner = () => {
 	// banner
 	// 调用此接口, 可获取 banner(轮播图) 数据,
-
 	// 可选参数:
 	// type: 资源类型, 对应以下类型, 默认为 0 即 PC
-	// 0: pc 1: android 2: iphone 3: ipad
+	// 0:pc 1:android 2:iphone 3:ipad
+	// 接口地址: /banner
+	// 调用例子: /banner, /banner?type = 2
 	return service({
 		url: `/banner?type=0`,
 		methods: 'GET'
@@ -24,15 +25,25 @@ export const banner = () => {
 // 		methods: 'GET'
 // 	})
 // }
-export const banners = () => {
-	// 歌单
-	// 调用此接口, 可获取 banner(轮播图) 数据,
-
-	// 可选参数:
-	// type: 资源类型, 对应以下类型, 默认为 0 即 PC
-	// 0: pc 1: android 2: iphone 3: ipad
+export const dailySongList = () => {
+	// 说明: 调用此接口, 可获取推荐歌单
+	// 可选参数: limit: 取出数量, 默认为 30(不支持 offset)
+	// 接口地址: /personalized
+	// 调用例子: /personalized?limit=1
 	return service({
-		url: `/banner?type=0`,
+		url: `/personalized?limit=12`,
+		methods: 'GET'
+	})
+}
+
+export const newsong = () => {
+	// 推荐新音乐
+	// 说明: 调用此接口, 可获取推荐新音乐
+	// 可选参数: limit: 取出数量, 默认为 10(不支持 offset)
+	// 接口地址: /personalized/newsong
+	// 调用例子: /personalized/newsong
+	return service({
+		url: `/personalized/newsong`,
 		methods: 'GET'
 	})
 }

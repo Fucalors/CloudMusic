@@ -45,7 +45,7 @@ service.interceptors.request.use(
 		if (config.method === 'POST') {  //提前处理POST请求
 			config.data = queryString.stringify(config.data)
 		}
-		console.log('请求拦截器')
+		// console.log('请求拦截器')
 		return config
 	},
 	error => {

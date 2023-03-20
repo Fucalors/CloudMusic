@@ -31,7 +31,7 @@
   }
   .el-header {
     height: 60px;
-    //padding: 10px 0;
+    padding: 0;
   }
   .el-aside {
     background-color: cadetblue;

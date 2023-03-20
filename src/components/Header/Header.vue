@@ -93,9 +93,10 @@
     background-color: #37bdd7;
 
     .logo {
-      width: 180px;
+      width: 200px;
       display: flex;
       align-items: center;
+      padding-left: 20px;
 
       .icon {
         font-size: 28px;
@@ -124,6 +125,7 @@
     }
 
     .serach {
+      color: #000;
     }
 
     .avatar {

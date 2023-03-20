@@ -24,7 +24,8 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
-		}
+		},
+		extensions: ['.vue', '.js', '.json']
 	},
 
 	//本地运行配置，以及反向代理配置
