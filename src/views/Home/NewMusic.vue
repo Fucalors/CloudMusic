@@ -1,10 +1,8 @@
 <template>
-  <div>Main</div>
+  <div>NewMusic</div>
 </template>
 
-<script>
-  //import  from '';
-</script>
+<script setup></script>
 
 <style lang="less" scoped>
   //@import url(); 引入公共css类

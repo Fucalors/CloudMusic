@@ -1,10 +1,8 @@
 <template>
-  <div>Fa</div>
+  <div>SongList</div>
 </template>
 
-<script setup>
-  //import  from '';
-</script>
+<script setup></script>
 
 <style lang="less" scoped>
   //@import url(); 引入公共css类

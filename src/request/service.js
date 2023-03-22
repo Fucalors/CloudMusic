@@ -60,6 +60,10 @@ service.interceptors.response.use(
 		return response.status === 200 ? Promise.resolve(response) : Promise.reject(response);
 	},
 	error => {
+		Notification.error({
+			title: 'Error',
+			message: error.response
+		})
 		if (error && error.response) {
 			errorHandle(error.response.status, error.response.data.message, error.response.errorInfo)
 		} //后面添加的 error.response.errorInfo

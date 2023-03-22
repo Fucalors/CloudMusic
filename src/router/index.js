@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/Home/Home.vue'
+// import HomeView from '../views/Home/Index.vue'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,37 +8,37 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: HomeView,
+			// component: HomeView,
 			redirect: '/index',
 			children: [
 				{
 					// 当 /user/:id/profile 匹配成功
 					// UserProfile 将被渲染到 User 的 <router-view> 内部
-					path: '/index',
-					name: 'index',
-					component: () => import('../components/Main/HomePage.vue'),
+					path: '/discovermusic',
+					name: 'discovermusic',
+					component: () => import('../views/Home/DiscoverMusic.vue'),
 				},
 				{
 					// 当 /user/:id/profile 匹配成功
 					// UserProfile 将被渲染到 User 的 <router-view> 内部
-					path: '/main',
-					name: 'main',
-					component: () => import('../views/Content/Main.vue'),
+					path: '/newmusic',
+					name: 'newmusic',
+					component: () => import('../views/Home/NewMusic.vue'),
 
 				},
 				{
 					// 当 /user/:id/profile 匹配成功
 					// UserProfile 将被渲染到 User 的 <router-view> 内部
-					path: '/fa',
-					name: 'fa',
-					component: () => import('../views/Content/Fa.vue'),
+					path: '/songlist',
+					name: 'songlist',
+					component: () => import('../views/Home/SongList.vue'),
 				},
 				{
 					// 当 /user/:id/profile 匹配成功
 					// UserProfile 将被渲染到 User 的 <router-view> 内部
 					path: '/mv',
 					name: 'mv',
-					component: () => import('../views/Content/Mv.vue'),
+					component: () => import('../views/Home/Mv.vue'),
 				}
 			]
 		},

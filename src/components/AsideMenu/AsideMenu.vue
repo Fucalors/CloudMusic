@@ -1,17 +1,17 @@
 <template>
   <el-scrollbar wrap-class="scrollbarHeight">
     <el-menu :default-active="$route.name" class="el-menu-vertical-demo" router active-text-color="red">
-      <el-menu-item index="index" route="/index">
+      <el-menu-item index="discovermusic" route="/discovermusic">
         <el-icon><Headset /></el-icon>
         <span>发现音乐</span>
       </el-menu-item>
 
-      <el-menu-item index="main" route="/main">
+      <el-menu-item index="newmusic" route="/newmusic">
         <el-icon><Collection /></el-icon>
         <span>新音乐</span>
       </el-menu-item>
 
-      <el-menu-item index="fa" route="/fa">
+      <el-menu-item index="songlist" route="/songlist">
         <el-icon><DocumentCopy /></el-icon>
         <span>歌单</span>
       </el-menu-item>
@@ -66,7 +66,11 @@
   .scrollbarHeight {
     max-height: calc(100vh - 160px);
     width: 100%;
-    background-color: white;
+    background-color: rgb(228, 231, 237);
+    border-right: 1px solid #bfbfbf;
+    .el-menu {
+      background-color: rgb(228, 231, 237);
+    }
   }
   .el-scrollbar__bar.is-vertical {
     //滚动条宽度
