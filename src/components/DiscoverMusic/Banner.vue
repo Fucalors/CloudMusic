@@ -1,6 +1,6 @@
 <template>
   <div class="banner" @click="Tip">
-    <el-carousel :interval="3000" type="card" indicator-position="none" height="250px">
+    <el-carousel @change="handleChange" :interval="3000" type="card" indicator-position="none" height="200px">
       <el-carousel-item v-for="banners in bannerImg" :key="banners">
         <img :src="banners.imageUrl" :alt="banners.typeTitle" />
         <!-- <el-image :src="item.pic" fit="cover" /> -->
@@ -14,6 +14,11 @@
   import { ref } from 'vue'
 
   const bannerImg = ref([]) //图片加载
+
+  const handleChange = (banners) => {
+    //当前索引
+    // console.log(banners)
+  }
 
   const getBanner = async () => {
     //图片加载
@@ -53,13 +58,16 @@
   //@import url(); 引入公共css类
   .banner {
     width: 100%;
-    //   height: auto;
+    height: 200px;
     //   background-color: rgb(224, 74, 74);
-    border-radius: 12px;
+    border-radius: 10px;
+    margin-top: 5px;
+
     img {
       display: block;
       width: 100%;
-      height: 250px;
+      height: 100%;
+      border-radius: 10px;
       object-fit: cover;
     }
   }

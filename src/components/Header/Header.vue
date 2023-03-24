@@ -45,7 +45,7 @@
       </el-dialog>
     </div>
 
-    <div></div>
+    <div>{{ CurrentTime }}</div>
   </div>
 </template>
 
@@ -54,12 +54,21 @@
   import { useCounterStore } from '@/stores/counter'
   import { ref } from 'vue'
   import { Search } from '@element-plus/icons-vue'
+  import { getCurrentTime } from '../../plugin/index.js'
   // import {banner} from '../../request/index'
   // access the `store` variable anywhere in the component ✨
   const store = useCounterStore() //实例化仓库
   const { count } = storeToRefs(store) //简化store
 
   const searchContent = ref('') //搜索
+
+  const CurrentTime = ref() //当前时间
+  setInterval(() => {
+    //当前时间
+    CurrentTime.value = getCurrentTime()
+    // console.log(CurrentTime.value)
+  }, 1000)
+
   // console.log(searchContent)
   const errorHandler = () => true //图片加载失败时的回退行为。
 
@@ -71,17 +80,6 @@
     const password = ref('')
     console.log(usereamil + password)
   }
-
-  // const getBanner = async () => {  //图片加载
-  //   await banner().then(res => {
-  //     //处理数据逻辑
-  //     console.log(res)
-  //   }).catch(error => {
-  //     //处理错误逻辑
-  //     console.log(error + ' 请求数据失败')
-  //   })
-  //   // getBanner()
-  // }
 </script>
 
 <style lang="less" scoped>
@@ -90,7 +88,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    background-color: #37bdd7;
+    // background-color: #37bdd7;
 
     .logo {
       width: 200px;

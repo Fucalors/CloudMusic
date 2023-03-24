@@ -4,16 +4,16 @@
       <el-header>
         <Header />
       </el-header>
+
       <el-container>
-        <el-aside width="200px">
+        <el-aside width="180px">
           <AsideMenu />
         </el-aside>
-        <el-container>
-          <el-main>
-            <RouterView></RouterView>
-          </el-main>
-        </el-container>
+        <el-main>
+          <RouterView></RouterView>
+        </el-main>
       </el-container>
+
       <el-footer>
         <Footer />
       </el-footer>
@@ -39,6 +39,7 @@
     // height: 100vh;
     // min-height: 100vh;
     background-color: rgb(228, 231, 237);
+    font-size: 16px;
   }
 
   img {
@@ -55,34 +56,44 @@
     overflow: hidden;
   }
   .common-layout {
-    // width: 1366px;
+    width: 1366px;
     min-width: 1250px;
-    height: 100%;
+    height: 100vh;
+    margin: 0 auto; //居中
     min-height: 600px;
   }
   .el-container {
     background-color: rgb(228, 231, 237);
   }
   .el-header {
-    height: 60px;
+    height: 65px;
     padding: 0;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
   }
   .el-aside {
-    background-color: rgb(228, 231, 237);
+    // background-color: rgb(228, 231, 237);
+    max-height: calc(100vh - 200px);
+    background-color: transparent;
+    border-radius: 10px;
   }
   .el-main {
-    background-color: rgb(228, 231, 237);
-    height: calc(100vh - 160px);
-    overflow: auto;
-    padding: 0;
+    // background-color: rgb(228, 231, 237);
+    background-color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+    max-height: calc(100vh - 200px);
+    overflow: hidden;
+    padding: 0 10px;
   }
   .el-footer {
-    width: 100%;
     height: 100px;
-    background-color: rgb(228, 231, 237);
-    position: fixed;
-    bottom: 0;
-    border-top: 2px solid #bfbfbf;
+    background-color: rgb(252, 252, 252);
+    margin-top: 20px;
+    // position: fixed;
+    // bottom: 0;
+    border-radius: 10px;
     z-index: 999;
   }
 </style>

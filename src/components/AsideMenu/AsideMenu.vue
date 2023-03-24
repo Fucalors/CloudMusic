@@ -64,12 +64,13 @@
 
 <style lang="less" scope>
   .scrollbarHeight {
-    max-height: calc(100vh - 160px);
     width: 100%;
-    background-color: rgb(228, 231, 237);
-    border-right: 1px solid #bfbfbf;
+    // background-color: rgb(228, 231, 237);
+
     .el-menu {
-      background-color: rgb(228, 231, 237);
+      //   background-color: rgb(228, 231, 237);
+      background-color: white;
+      border-radius: 10px;
     }
   }
   .el-scrollbar__bar.is-vertical {

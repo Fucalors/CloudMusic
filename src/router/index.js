@@ -9,7 +9,7 @@ const router = createRouter({
 			path: '/',
 			name: 'home',
 			// component: HomeView,
-			redirect: '/index',
+			redirect: '/discovermusic',
 			children: [
 				{
 					// 当 /user/:id/profile 匹配成功

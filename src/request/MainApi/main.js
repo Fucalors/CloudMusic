@@ -36,14 +36,14 @@ export const dailySongList = () => {
 	})
 }
 
-export const newsong = () => {
+export const newSong = () => {
 	// 推荐新音乐
 	// 说明: 调用此接口, 可获取推荐新音乐
 	// 可选参数: limit: 取出数量, 默认为 10(不支持 offset)
 	// 接口地址: /personalized/newsong
 	// 调用例子: /personalized/newsong
 	return service({
-		url: `/personalized/newsong`,
+		url: `/personalized/newsong?limit=15`,
 		methods: 'GET'
 	})
 }

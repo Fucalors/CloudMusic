@@ -10,7 +10,7 @@
             <el-icon><VideoPlay /></el-icon>
             {{ playCount(list.playCount) }}
           </span>
-          <img :src="list.picUrl" :alt="list.name" />
+          <img class="imgc" :src="list.picUrl" :alt="list.name" />
         </div>
         <span class="songListName">{{ list.name }}</span>
       </el-col>
@@ -21,20 +21,10 @@
 <script setup>
   import { VideoPlay } from '@element-plus/icons-vue'
   import { dailySongList } from '../../request/MainApi/main'
+  import { playCount } from '../../plugin/index.js'
   import { ref } from 'vue'
 
   const songList = ref([]) //歌单
-
-  // 对播放数量的处理
-  const playCount = (number) => {
-    if (number < 10000) {
-      return number
-    } else if (number < 100000000) {
-      return (number / 10000).toFixed(1) + '万'
-    } else {
-      return (number / 100000000).toFixed(1) + '亿'
-    }
-  }
 
   const getSongList = async () => {
     //歌单获取
@@ -42,7 +32,7 @@
       .then((res) => {
         //处理数据逻辑
         songList.value = res.data.result
-        console.log(res.data.result)
+        // console.log(res.data.result)
       })
       .catch((error) => {
         //处理错误逻辑
@@ -67,6 +57,7 @@
     .title {
       // background-color: red;
       padding: 8px 0;
+      margin-bottom: 12px;
       span {
         color: #212020;
         font-size: 18px;
@@ -76,7 +67,6 @@
       }
     }
     .el-row {
-      margin-top: 10px;
       &:last-child {
         margin-bottom: 0;
       }
@@ -92,10 +82,11 @@
           max-height: 200px;
           min-height: 100px;
           aspect-ratio: 1 / 1; //使其始终保持宽高比
-          box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
-          -webkit-box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
-          -moz-box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
+          //   box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
+          //   -webkit-box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
+          //   -moz-box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
           position: relative;
+
           .playCount {
             display: flex;
             position: absolute;
@@ -120,12 +111,9 @@
             object-fit: cover;
             cursor: pointer;
           }
-          // img:hover {
-          //   transform: scale(1.01);
-          //   box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
-          //   -webkit-box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
-          //   -moz-box-shadow: 0px 0px 5px 3px rgb(169, 169, 169);
-          // }
+        }
+        .grid-content:hover {
+          box-shadow: 0 30px 28px -16px rgba(0, 0, 0, 0.26);
         }
         .songListName {
           text-align: left;
