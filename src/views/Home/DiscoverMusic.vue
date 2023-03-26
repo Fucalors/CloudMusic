@@ -4,10 +4,13 @@
       <Banner />
       <Songlist />
       <Newsong />
+      <Privatecontent />
     </div>
   </el-scrollbar>
 </template>
-<script setup></script>
+<script setup>
+  import Privatecontent from '../../components/DiscoverMusic/Privatecontent.vue'
+</script>
 
 <style lang="less" scoped>
   .container {

@@ -20,8 +20,8 @@
 
 <script setup>
   import { VideoPlay } from '@element-plus/icons-vue'
-  import { dailySongList } from '../../request/MainApi/main'
-  import { playCount } from '../../plugin/index.js'
+  import { dailySongList } from '../../server/MainApi/main'
+  import { playCount } from '../../plugins/index.js'
   import { ref } from 'vue'
 
   const songList = ref([]) //歌单
@@ -36,10 +36,10 @@
       })
       .catch((error) => {
         //处理错误逻辑
-        console.log(error + ' 请求HomePage数据失败')
+        // console.log('请求今日推荐歌单数据失败: ' + error.message)
         // 界面错误提示
         ElMessage({
-          message: '获取数据失败，请稍后再试。',
+          message: '获取今日推荐歌单数据失败: ' + error.message,
           type: 'error',
           grouping: true, //分组归类
           showClose: true //支持关闭
@@ -117,7 +117,7 @@
         }
         .songListName {
           text-align: left;
-          margin-top: 8px;
+          margin-top: 6px;
           -webkit-line-clamp: 2; //（用来限制在一个块元素显示的文本的行数，2 表示最多显示 2 行。为了实现该效果，它需要组合其他的 WebKit 属性）
           display: -webkit-box; //（和 1 结合使用，将对象作为弹性伸缩盒子模型显示 ）
           -webkit-box-orient: vertical; //（和 1 结合使用 ，设置或检索伸缩盒对象的子元素的排列方式 ）

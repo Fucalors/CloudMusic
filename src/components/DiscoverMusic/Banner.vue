@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  import { banner } from '../../request/MainApi/main'
+  import { banner } from '../../server/MainApi/main'
   import { ref } from 'vue'
 
   const bannerImg = ref([]) //图片加载
@@ -31,10 +31,10 @@
       })
       .catch((error) => {
         //处理错误逻辑
-        console.log(error + ' 请求HomePage数据失败')
+        // console.log('获取Banner数据失败: ' + error.response.statusText + ': ' + error.message)
         // 界面错误提示
         ElMessage({
-          message: '获取数据失败，请稍后再试。',
+          message: '获取Banner数据失败: ' + error.message,
           type: 'error',
           grouping: true, //分组归类
           showClose: true //支持关闭

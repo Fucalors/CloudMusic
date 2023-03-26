@@ -47,3 +47,17 @@ export const newSong = () => {
 		methods: 'GET'
 	})
 }
+
+export const privateContent = () => {
+	// 独家放送(入口列表)
+
+	// 说明: 调用此接口, 可获取独家放送
+
+	// 接口地址: /personalized/privatecontent
+
+	// 调用例子: /personalized/privatecontent
+	return service({
+		url: `/personalized/privatecontent`,
+		methods: 'GET'
+	})
+}

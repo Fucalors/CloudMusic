@@ -54,7 +54,7 @@
   import { useCounterStore } from '@/stores/counter'
   import { ref } from 'vue'
   import { Search } from '@element-plus/icons-vue'
-  import { getCurrentTime } from '../../plugin/index.js'
+  import { getCurrentTime } from '../../plugins/index.js'
   // import {banner} from '../../request/index'
   // access the `store` variable anywhere in the component ✨
   const store = useCounterStore() //实例化仓库
