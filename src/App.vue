@@ -2,7 +2,16 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <Header />
+        <div class="left">
+          <Logo />
+          <Arrow />
+        </div>
+        <div class="right">
+          <Search />
+          <Logi />
+        </div>
+        <!-- <Header />
+         -->
       </el-header>
 
       <el-container>
@@ -71,6 +80,22 @@
     margin-bottom: 10px;
     background-color: white;
     border-radius: 0 0 10px 10px;
+    width: 100%;
+    display: flex;
+    .left {
+      width: 35%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .right {
+      width: 65%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      display: flex;
+      align-items: center;
+    }
   }
   .el-aside {
     // background-color: rgb(228, 231, 237);

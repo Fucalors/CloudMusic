@@ -40,17 +40,18 @@ const router = createRouter({
 					name: 'mv',
 					component: () => import('../views/Home/Mv.vue'),
 				}
+
 			]
 		},
-		{
-			path: '/login',
-			name: 'login',
-			// route level code-splitting
-			// this generates a separate chunk (About.[hash].js) for this route
-			// which is lazy-loaded when the route is visited.
-			// component: resolve => reqire(['../views/Login.vue'],resolve) // 异步组件写法
-			component: () => import('../views/Login/Login.vue')
-		},
+		// {
+		// 	path: '/login',
+		// 	name: 'login',
+		// 	// route level code-splitting
+		// 	// this generates a separate chunk (About.[hash].js) for this route
+		// 	// which is lazy-loaded when the route is visited.
+		// 	// component: resolve => reqire(['../views/Login.vue'],resolve) // 异步组件写法
+		// 	component: () => import('../components/Login/Login.vue')
+		// },
 		// {
 		// 	path: '/main',
 		// 	name: 'main',

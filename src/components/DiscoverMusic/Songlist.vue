@@ -7,7 +7,9 @@
       <el-col :span="4" v-for="list in songList" :key="list">
         <div class="grid-content">
           <span class="playCount">
-            <el-icon><VideoPlay /></el-icon>
+            <el-icon>
+              <VideoPlay />
+            </el-icon>
             {{ playCount(list.playCount) }}
           </span>
           <img class="imgc" :src="list.picUrl" :alt="list.name" />
@@ -20,33 +22,28 @@
 
 <script setup>
   import { VideoPlay } from '@element-plus/icons-vue'
-  import { dailySongList } from '../../server/MainApi/main'
-  import { playCount } from '../../plugins/index.js'
-  import { ref } from 'vue'
+  import { dailySongList } from '@/server/MainApi/main'
+  import { playCount } from '@/plugins/index.js'
+  import { ref, onMounted } from 'vue'
 
   const songList = ref([]) //歌单
 
   const getSongList = async () => {
-    //歌单获取
-    await dailySongList()
-      .then((res) => {
-        //处理数据逻辑
-        songList.value = res.data.result
-        // console.log(res.data.result)
-      })
-      .catch((error) => {
-        //处理错误逻辑
-        // console.log('请求今日推荐歌单数据失败: ' + error.message)
-        // 界面错误提示
-        ElMessage({
-          message: '获取今日推荐歌单数据失败: ' + error.message,
-          type: 'error',
-          grouping: true, //分组归类
-          showClose: true //支持关闭
-        })
-      })
+    try {
+      //处理数据逻辑
+      let res = await dailySongList()
+      songList.value = res.data.result
+      // console.log(res.data)
+    } catch (error) {
+      //处理错误逻辑
+      // console.log('获取Banner数据失败: ' + error.response.statusText + ': ' + error.message)
+      console.error(error.message)
+    }
   }
-  getSongList()
+
+  onMounted(() => {
+    getSongList()
+  })
 </script>
 
 <style lang="less" scoped>
@@ -54,10 +51,12 @@
 
   .dailySongList {
     margin-top: 40px;
+
     .title {
       // background-color: red;
       padding: 8px 0;
       margin-bottom: 12px;
+
       span {
         color: #212020;
         font-size: 18px;
@@ -66,13 +65,16 @@
         border-bottom: 3px solid #333;
       }
     }
+
     .el-row {
       &:last-child {
         margin-bottom: 0;
       }
+
       .el-col {
         display: block;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
+
         .grid-content {
           background: rgb(228, 231, 237);
           border-radius: 4px;
@@ -97,11 +99,13 @@
             color: #fff;
             font-size: 13px;
             z-index: 2;
+
             i {
               color: red;
               margin-right: 2px;
             }
           }
+
           img {
             display: block;
             border-radius: 4px;
@@ -112,9 +116,11 @@
             cursor: pointer;
           }
         }
+
         .grid-content:hover {
           box-shadow: 0 30px 28px -16px rgba(0, 0, 0, 0.26);
         }
+
         .songListName {
           text-align: left;
           margin-top: 6px;

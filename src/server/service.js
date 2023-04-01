@@ -1,7 +1,6 @@
 //引入axios
 import axios from 'axios'
 
-// import { queuePostFlushCb } from "vue";
 // 创建axios实例
 const service = axios.create({
 	baseURL: '/api', // 使用代理服务器
@@ -58,11 +57,17 @@ service.interceptors.request.use(
 		if (config.method === 'POST') {  //提前处理POST请求
 			config.data = queryString.stringify(config.data)
 		}
+		// ElMessage({
+		// 	message: '获取成功',
+		// 	type: 'success',
+		// 	grouping: true, //分组归类
+		// 	showClose: true //支持关闭
+		// })
 		return config
 	},
 	error => {
 		// Message.error({ message: '请求超时!' })
-		console.log(error.message + '请求超时!');
+		// console.log(error.message + '请求超时!');
 		return Promise.reject(error);
 	}
 )
@@ -77,9 +82,9 @@ service.interceptors.response.use(
 	},
 	error => {
 		// console.log(error.response.statusText + ': ' + error.message)
-		if (error && error.response) {
-			errorHandle(error.response.status, error.response.message)
-		}
+		// if (error && error.response) {
+		// 	errorHandle(error.response.status, error.response.message)
+		// }
 
 		return Promise.reject(error)
 	}

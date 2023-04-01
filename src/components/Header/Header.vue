@@ -3,7 +3,7 @@
     <!-- logo -->
     <div class="logo">
       <i class="icon ri-netease-cloud-music-fill"></i>
-      <span @click="getBanner()">网易云音乐</span>
+      <span>网易云音乐</span>
     </div>
 
     <!--左右前进返回按钮-->
@@ -29,21 +29,11 @@
       <el-avatar :size="40" src="https://empty" @error="errorHandler" @click="centerDialogVisible = true">
         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
       </el-avatar>
-
-      <el-dialog v-model="centerDialogVisible" title="请登录" width="30%" center>
-        <span>
-          <el-input v-model="usereamil" placeholder="eamil" clearable />
-          <el-input v-model="password" type="password" placeholder="Please input password" show-password />
-        </span>
-
-        <template #footer>
-          <span class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取消</el-button>
-            <el-button type="primary" @click="Login">登录</el-button>
-          </span>
-        </template>
-      </el-dialog>
     </div>
+    <!-- 登录 -->
+    <el-dialog v-model="centerDialogVisible" title="网易云音乐" width="30%" center>
+      <Login />
+    </el-dialog>
 
     <div>{{ CurrentTime }}</div>
   </div>
@@ -61,7 +51,6 @@
   const { count } = storeToRefs(store) //简化store
 
   const searchContent = ref('') //搜索
-
   const CurrentTime = ref() //当前时间
   setInterval(() => {
     //当前时间
@@ -75,11 +64,11 @@
   const centerDialogVisible = ref(false) //单击头像事件
   //登录
 
-  const Login = () => {
-    const usereamil = ref('')
-    const password = ref('')
-    console.log(usereamil + password)
-  }
+  //   const Login = () => {
+  //     const usereamil = ref('')
+  //     const password = ref('')
+  //     console.log(usereamil + password)
+  //   }
 </script>
 
 <style lang="less" scoped>
@@ -91,7 +80,7 @@
     // background-color: #37bdd7;
 
     .logo {
-      width: 200px;
+      width: 180px;
       display: flex;
       align-items: center;
       padding-left: 20px;
@@ -113,7 +102,7 @@
       justify-content: space-between;
 
       .icon {
-        background-color: #cdbcbc;
+        background-color: #efefef;
         border-radius: 50%;
         padding: 5px;
         font-size: 28px;

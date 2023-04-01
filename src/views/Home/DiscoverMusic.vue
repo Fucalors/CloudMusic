@@ -3,6 +3,7 @@
     <div class="container">
       <Banner />
       <Songlist />
+      <RecommendMv />
       <Newsong />
       <Privatecontent />
     </div>
@@ -10,6 +11,7 @@
 </template>
 <script setup>
   import Privatecontent from '../../components/DiscoverMusic/Privatecontent.vue'
+  import RecommendMv from '../../components/DiscoverMusic/RecommendMv.vue'
 </script>
 
 <style lang="less" scoped>

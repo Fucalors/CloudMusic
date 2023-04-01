@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-  import { banner } from '../../server/MainApi/main'
-  import { ref } from 'vue'
+  import { banner } from '@/server/MainApi/main'
+  import { ref, onMounted } from 'vue'
 
   const bannerImg = ref([]) //图片加载
 
@@ -21,26 +21,22 @@
   }
 
   const getBanner = async () => {
-    //图片加载
-    await banner()
-      .then((res) => {
-        //处理数据逻辑
-
-        bannerImg.value = res.data.banners
-        // console.log(res.data)
-      })
-      .catch((error) => {
-        //处理错误逻辑
-        // console.log('获取Banner数据失败: ' + error.response.statusText + ': ' + error.message)
-        // 界面错误提示
-        ElMessage({
-          message: '获取Banner数据失败: ' + error.message,
-          type: 'error',
-          grouping: true, //分组归类
-          showClose: true //支持关闭
-        })
-      })
+    try {
+      //处理数据逻辑
+      let res = await banner()
+      bannerImg.value = res.data.banners
+      // console.log(res.data)
+    } catch (error) {
+      //处理错误逻辑
+      // console.log('获取Banner数据失败: ' + error.response.statusText + ': ' + error.message)
+      console.error(error.message)
+    }
   }
+
+  onMounted(() => {
+    getBanner()
+  })
+
   const Tip = (banners) => {
     // 此功能不完善
     ElMessage({
@@ -51,7 +47,6 @@
     })
     // console.log(banners)
   }
-  getBanner()
 </script>
 
 <style lang="less" scoped>

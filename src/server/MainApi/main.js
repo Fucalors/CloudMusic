@@ -61,3 +61,45 @@ export const privateContent = () => {
 		methods: 'GET'
 	})
 }
+
+export const recommendMv = () => {
+	// 推荐 mv
+	// 说明: 调用此接口, 可获取推荐 mv
+
+	// 接口地址: /personalized/mv
+
+	// 调用例子: /personalized/mv
+	return service({
+		url: `/personalized/mv`,
+		methods: 'GET'
+	})
+}
+
+export const hotSearch = async () => {
+	// 热搜列表(简略)
+	// 说明: 调用此接口, 可获取热门搜索列表
+
+	// 接口地址: /search/hot
+
+	// 调用例子: /search/hot
+
+	return service({
+		url: `/search/hot`,
+		methods: 'GET'
+	})
+}
+// 向给定ID的用户发起请求
+
+export const hotSearchDetail = () => {
+	// 热搜列表(详细)
+	// 说明: 调用此接口, 可获取热门搜索列表
+
+	// 接口地址: /search/hot/detail
+
+	// 调用例子: /search/hot/detail
+
+	return service({
+		url: `/search/hot/detail`,
+		methods: 'GET'
+	})
+}
