@@ -1,7 +1,7 @@
 <template>
   <div class="dailySongList">
     <div class="title">
-      <span>今日推荐歌单</span>
+      <span v-if="dataLoaded">{{ songListTitle }}</span>
     </div>
     <el-row :gutter="20">
       <el-col :span="4" v-for="list in songList" :key="list">
@@ -27,6 +27,8 @@
   import { ref, onMounted } from 'vue'
 
   const songList = ref([]) //歌单
+  const songListTitle = '今日推荐歌单' //标题
+  const dataLoaded = ref('false') //避免标题渲染快
 
   const getSongList = async () => {
     try {
@@ -43,6 +45,7 @@
 
   onMounted(() => {
     getSongList()
+    dataLoaded.value = true //避免标题渲染快
   })
 </script>
 

@@ -29,7 +29,11 @@ export const convertMsToMinSec = (ms) => { // 毫秒  --> 分:秒 函数
 	return minutes + ':' + (seconds < 10 ? '0' : '') + seconds
 }
 
-// 密码的校验函数
+/**
+ * 
+ * @param {*} password 
+ * @returns 密码的校验函数
+ */
 export const validatePassword = (password) => {
 	// const password = "MySecurePassword123!";
 	// const isValid = validatePassword(password);
@@ -54,13 +58,47 @@ export const validatePassword = (password) => {
 	// If all checks pass, password is valid
 	return true;
 }
-// 邮箱的校验函数
+/**
+ * 
+ * @param {*} email 
+ * @returns 邮箱的校验函数
+ */
 export const validateEmail = (email) => {
 	const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	return re.test(email);
 }
-// 电话号码的校验函数
+/**
+ * 
+ * @param {*} phoneNumber 
+ * @returns 电话号码的校验函数
+ */
 export const validatePhoneNumber = (phoneNumber) => {
 	const regex = /^1[3456789]\d{9}$/;
 	return regex.test(phoneNumber);
 }
+
+/**
+ * 
+ * @param {*} func 
+ * @param {*} delay 
+ * @returns 防抖函数
+ * 使用方法
+ * function myFunction() {
+	console.log('Hello, world!');
+}
+const debouncedFunction = debounce(myFunction, 1000);
+debouncedFunction(); // logs 'Hello, world!' after 1 second
+ */
+export const debounce = (func, delay) => {
+	let timeoutId;
+	return function (...args) {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => {
+			func.apply(this, args);
+		}, delay);
+	};
+}
+
+
+
+

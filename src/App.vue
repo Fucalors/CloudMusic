@@ -121,4 +121,12 @@
     border-radius: 10px;
     z-index: 999;
   }
+  .el-popper {
+    width: 365px;
+    padding: 0 !important;
+    height: 430px !important;
+    // .is-light {
+    //   border: 0 !important;
+    // }
+  }
 </style>

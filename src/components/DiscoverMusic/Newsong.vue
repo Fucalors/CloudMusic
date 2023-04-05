@@ -1,7 +1,7 @@
 <template>
   <div class="newSong">
     <div class="title">
-      <span>推荐新音乐</span>
+      <span v-if="dataLoaded">{{ newSongTitle }}</span>
     </div>
     <div class="content">
       <div class="musicList" v-for="item in newMusic" :key="item">
@@ -27,6 +27,8 @@
   import { ref, onMounted } from 'vue'
 
   const newMusic = ref([]) //推荐新音乐
+  const newSongTitle = '推荐新音乐' //标题
+  const dataLoaded = ref('false') //避免标题渲染快
 
   const getRecommendNewMusic = async () => {
     try {
@@ -43,6 +45,7 @@
 
   onMounted(() => {
     getRecommendNewMusic()
+    dataLoaded.value = true //避免标题渲染快
   })
 </script>
 

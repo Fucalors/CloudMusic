@@ -2,7 +2,13 @@
   <div>搜索建议</div>
 </template>
 
-<script setup></script>
+<script>
+  export default {
+    setup(props) {
+      console.log(props)
+    }
+  }
+</script>
 
 <style lang="less" scoped>
   //@import url(); 引入公共css类
