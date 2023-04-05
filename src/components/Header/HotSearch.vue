@@ -49,6 +49,7 @@
   //@import url(); 引入公共css类
   .container {
     width: 100%;
+    padding-bottom: 2px;
     // height: 100%;
     // background-color: red;
     height: 430px;

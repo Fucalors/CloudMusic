@@ -1,7 +1,7 @@
 <template>
   <div class="privateContent">
     <div class="title">
-      <span v-if="dataLoaded">{{ soleTitle }}</span>
+      <span>{{ soleTitle }}</span>
     </div>
     <div class="content">
       <div class="exclusive" v-for="item in sole" :key="item">
@@ -19,7 +19,6 @@
 
   const sole = ref([]) // 独家放送
   const soleTitle = '独家放送' //标题
-  const dataLoaded = ref('false') //避免标题渲染快
 
   const getPrivateContent = async () => {
     try {
@@ -36,7 +35,6 @@
 
   onMounted(() => {
     getPrivateContent()
-    dataLoaded.value = true //避免标题渲染快
   })
 </script>
 

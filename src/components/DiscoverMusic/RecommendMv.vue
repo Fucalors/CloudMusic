@@ -1,7 +1,7 @@
 <template>
   <div class="privateContent">
     <div class="title">
-      <span v-if="dataLoaded">{{ mvTitle }}</span>
+      <span>{{ mvTitle }}</span>
     </div>
     <div class="content">
       <div class="recommendMv" v-for="item in recommend" :key="item">
@@ -20,7 +20,6 @@
 
   const recommend = ref([]) // 推荐MV
   const mvTitle = '推荐MV' //标题
-  const dataLoaded = ref('false') //避免标题渲染快
 
   const getRecommendMv = async () => {
     try {
@@ -37,7 +36,6 @@
 
   onMounted(() => {
     getRecommendMv()
-    dataLoaded.value = true //避免标题渲染快
   })
 </script>
 

@@ -22,7 +22,7 @@
   //@import url(); 引入公共css类
   .avatar {
     cursor: pointer;
-
+    margin-left: 80px;
     .dialog-footer button:first-child {
       margin-right: 10px;
     }

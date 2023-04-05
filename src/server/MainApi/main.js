@@ -31,7 +31,7 @@ export const dailySongList = () => {
 	// 接口地址: /personalized
 	// 调用例子: /personalized?limit=1
 	return service({
-		url: `/personalized?limit=12`,
+		url: `/personalized?limit=18`,
 		methods: 'GET'
 	})
 }

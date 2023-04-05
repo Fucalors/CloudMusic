@@ -1,7 +1,7 @@
 <template>
   <div class="newSong">
     <div class="title">
-      <span v-if="dataLoaded">{{ newSongTitle }}</span>
+      <span>{{ newSongTitle }}</span>
     </div>
     <div class="content">
       <div class="musicList" v-for="item in newMusic" :key="item">
@@ -28,7 +28,6 @@
 
   const newMusic = ref([]) //推荐新音乐
   const newSongTitle = '推荐新音乐' //标题
-  const dataLoaded = ref('false') //避免标题渲染快
 
   const getRecommendNewMusic = async () => {
     try {
@@ -45,7 +44,6 @@
 
   onMounted(() => {
     getRecommendNewMusic()
-    dataLoaded.value = true //避免标题渲染快
   })
 </script>
 

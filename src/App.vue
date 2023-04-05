@@ -8,7 +8,7 @@
         </div>
         <div class="right">
           <Search />
-          <Logi />
+          <Avatar />
         </div>
         <!-- <Header />
          -->

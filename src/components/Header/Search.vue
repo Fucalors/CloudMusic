@@ -10,15 +10,14 @@
         <!-- <el-input v-for="item in hotSearchs" key="item" :placeholder="item.first" :prefix-icon="Search"></el-input> -->
       </template>
       <HotSearch v-if="!searchWords" />
-      <!-- <SearchTip v-else /> -->
       <div class="history-tip" v-else>
         <div class="history">
           <div class="title">
             {{ historyTitle }}
           </div>
           <div class="history-content">
-            <!-- <el-tag v-for="tag in tags" :key="tag.name" closable :type="tag.type">
-              {{ tag.name }}
+            <!-- <el-tag v-for="tag in searchWords" :key="tag" closable :type="tag.type">
+              {{ tag }}
             </el-tag> -->
           </div>
         </div>
@@ -33,12 +32,12 @@
             </div>
             <div class="songs-artists" v-for="item in info.searchKey.songs" :key="item">
               <span class="songs-name">{{ item.name }}</span>
-              <span class="line"></span>
+              <span class="line">一</span>
               <span class="artists-name" v-for="item1 in item.artists" :key="item1">{{ item1.name }}</span>
             </div>
           </div>
           <!-- 歌单 -->
-          <!-- <div class="songs-artists" v-if="info.searchKey">
+          <div class="songs" v-if="info.searchKey">
             <div class="orders">
               <el-icon>
                 <headset />
@@ -46,12 +45,10 @@
               歌单
             </div>
             <div class="songs-artists" v-for="item in info.searchKey.playlists" :key="item">
-              <img :src="item.coverImgUrl" alt="" />
+              <!-- <img :src="item.coverImgUrl" alt="" /> -->
               <span class="songs-name">{{ item.name }}</span>
-              <span class="line"></span>
-              <span class="artists-name" v-for="item1 in item.artists" :key="item1">{{ item1.name }}</span>
             </div>
-          </div> -->
+          </div>
           <!-- 专辑 -->
           <div class="songs" v-if="info.searchKey">
             <div class="orders">
@@ -62,10 +59,10 @@
             </div>
             <div class="songs-artists" v-for="item in info.searchKey.albums" :key="item">
               <span class="songs-name">{{ item.name }}</span>
-              <!-- <span class="line"></span>
-              <span class="artists-name" v-for="item1 in item.artist" :key="item1">
-                {{ item1.name }}
-              </span> -->
+              <span class="line">一</span>
+              <span class="artists-name">
+                {{ item.artist.name }}
+              </span>
             </div>
           </div>
           <!-- 歌手 -->
@@ -90,14 +87,15 @@
   import { Search, Headset } from '@element-plus/icons-vue'
   import { searchMultimatch } from '@/server/MainApi/main'
   import { ref, onMounted, reactive } from 'vue'
-  import { debounce } from '@/plugins/index.js'
   const searchWords = ref('') // 定义变量 keyWords 用来保存搜索的关键字
   const historyTitle = '搜索历史'
   const info = reactive({
-    searchKey: {} // 搜索建议
+    searchKey: {}, // 搜索建议
+    keyWorldHistory: [] //搜索历史列表
   })
   // 定义定时器
   let time
+  //搜索功能
   const getSearchMultimatch = async () => {
     try {
       let res = await searchMultimatch(searchWords.value)
@@ -108,30 +106,45 @@
     }
   }
   // 定义搜索关键词变化的函数
-  //   const keyWordsChange = () => {
-  //     // 清空定时器
-  //     clearTimeout(time)
-  //     if (searchWords.value !== '') {
-  //       time = setTimeout(() => {
-  //         getSearchMultimatch(searchWords.value)
-  //       }, 100)
-  //     } else {
-  //       // 清空searchTip
-  //       info.searchKey = {}
-  //     }
-  //   }
   const keyWordsChange = () => {
     // 清空定时器
     clearTimeout(time)
     if (searchWords.value !== '') {
-      debounce(getSearchMultimatch(searchWords.value), 1000)
+      time = setTimeout(() => {
+        getSearchMultimatch(searchWords.value)
+      }, 100)
     } else {
       // 清空searchTip
       info.searchKey = {}
     }
   }
+  //   const enterKey = async () => {
+  //     // 将当前搜索框中的关键字保存
+  //     localStorage.setItem('searchWords', JSON.stringify(searchWords.value))
+
+  //     // 判断，如果当关键字不为空串时才能进行搜索，否则进行提示
+  //     if (searchWords.value) {
+  //       // 跳转页面，并传递搜索的关键词
+  //       //   router.push({
+  //       //     name: 'searchSingle',
+  //       //     params: {
+  //       //       keywords: searchWords.value
+  //       //     }
+  //       //   })
+  //     } else {
+  //       ElMessage({
+  //         message: '请输入有效的搜索关键字 ！',
+  //         type: 'warning',
+  //         grouping: true
+  //       })
+  //     }
+  //   }
   onMounted(() => {
     getSearchMultimatch()
+    // 取出本地保存的记录
+    // searchWords.value = JSON.parse(localStorage.getItem('searchWords'))
+    //   ? JSON.parse(localStorage.getItem('searchWords'))
+    //   : []
   })
 </script>
 
@@ -194,6 +207,7 @@
     }
     .tip {
       width: 100%;
+      padding-bottom: 2px;
       //   height: 100%;
       //   background-color: rgb(176, 201, 34);
       .songs {
@@ -232,10 +246,10 @@
             text-overflow: ellipsis;
           }
           .line {
-            display: block;
-            width: 15px;
-            height: 1px;
-            background-color: #000;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 400;
             margin: 0 5px;
           }
           .artists-name {
