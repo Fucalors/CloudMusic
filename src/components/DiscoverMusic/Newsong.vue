@@ -100,7 +100,7 @@
         justify-content: space-between;
 
         .musicName {
-          font-size: 16px;
+          font-size: 14px;
           text-align: left;
           width: 100%;
           -webkit-line-clamp: 1;
@@ -108,28 +108,25 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
-
           span:nth-child(2) {
             color: #8a8a8a;
             margin-left: 8px;
-            font-size: 15px;
+            font-size: 14px;
           }
         }
 
         .singerName {
           display: flex;
-
           span {
             font-size: 13px;
             color: #585858;
             margin-right: 8px;
           }
         }
-
         .musicTime {
           display: flex;
           justify-content: flex-end;
-          font-size: 13px;
+          font-size: 12px;
           color: #585858;
         }
       }

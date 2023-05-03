@@ -1,20 +1,37 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
-
-export const useCounterStore = defineStore('counter', () => {
-	const count = ref(2)
-	// state: () => ({ count: 0 })
+import { getLoginEmail } from '@/server/Login/login.js'
 
 
-	// state: () => ({ count: 0 }) //返回对象写法
-	// state: () => ({
-	// 	return: {
-	// 		count: '3'
-	// 	}
-	// })
-	// getters: { }
-	// actions: { }
+export const useCounterStore = defineStore('counter', {
+	state: () => ({
+		isLogin: false, //判断是否登录
+		token: "", //登录token
+		user: {}, //用户数据
 
-	return { count }
+	}),
+
+	getters: {
+	},
+	actions: {
+		//异步登录
+		getLogin: async function (context, value) {
+			let res = await getLoginEmail(value)
+			console.log(res)
+			return res
+		},
+
+	},
+	mutations: {
+		updateIsLogin: function (state, value) {
+			state.isLogin = true
+		},
+		updateToken: function (state, value) {
+			state.token = value
+			localStorage.setItem('token', state.token)
+		},
+		updateUser: function (state, value) {
+			state.user = value
+		},
+	},
 
 })

@@ -38,7 +38,6 @@
       console.error(error.message)
     }
   }
-
   onMounted(() => {
     getHotSearch()
     dataLoaded.value = true //避免标题渲染快

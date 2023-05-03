@@ -99,6 +99,19 @@ export const debounce = (func, delay) => {
 	};
 }
 
-
-
-
+/**
+ * 
+ * @param {*} timestamp 
+ * @returns This function converts a timestamp to a date string in the format of "YYYY-MM-DD HH:MM:SS".
+ */
+export const convertTimestampToDateString = (timestamp) => {
+	const date = new Date(timestamp);
+	const year = date.getFullYear();
+	const month = date.getMonth() + 1;
+	const day = date.getDate();
+	const hours = ('0' + date.getHours()).slice(-2);
+	const minutes = ('0' + date.getMinutes()).slice(-2);
+	const seconds = ('0' + date.getSeconds()).slice(-2);
+	const dateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+	return dateString;
+}

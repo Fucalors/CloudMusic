@@ -2,131 +2,119 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <div class="left">
+        <div class="header-left">
           <Logo />
           <Arrow />
         </div>
-        <div class="right">
+        <div class="header-right">
           <Search />
           <Avatar />
+          <Time />
         </div>
-        <!-- <Header />
-         -->
       </el-header>
-
       <el-container>
-        <el-aside width="180px">
-          <AsideMenu />
-        </el-aside>
-        <el-main>
-          <RouterView></RouterView>
-        </el-main>
+        <el-aside width="200px"><AsideMenu /></el-aside>
+        <el-container>
+          <el-main>
+            <RouterView></RouterView>
+          </el-main>
+        </el-container>
       </el-container>
-
-      <el-footer>
-        <Footer />
-      </el-footer>
+      <el-footer>Footer</el-footer>
     </el-container>
   </div>
-  <!-- <RouterView /> -->
 </template>
 <script setup>
-  //   import { RouterView } from 'vue-router'
+  // import { RouterView } from 'vue-router'
+  //   import { getCurrentInstance } from 'vue'
+  //   let app = getCurrentInstance()
+  //   console.log(app)
+  //   console.log(app.appContext.app.config.globalProperties.$loading)
 </script>
 
 <style lang="less">
-  * {
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    box-sizing: border-box;
-  }
+  @import url('assets/main.css');
 
-  html,
-  body {
-    // width: 100vw;
-    // height: 100vh;
-    // min-height: 100vh;
-    background-color: rgb(228, 231, 237);
-    font-size: 16px;
-  }
-
-  img {
-    //vertical-align: top;
-    border: none;
-  }
-
-  .icon {
-    font-size: 23px;
-  }
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    overflow: hidden;
-  }
   .common-layout {
-    width: 1366px;
-    min-width: 1250px;
+    /* width: 1280px; */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
-    margin: 0 auto; //居中
-    min-height: 600px;
+    font-weight: normal;
   }
   .el-container {
-    background-color: rgb(228, 231, 237);
-  }
-  .el-header {
-    height: 65px;
-    padding: 0;
-    margin-bottom: 10px;
-    background-color: white;
-    border-radius: 0 0 10px 10px;
     width: 100%;
-    display: flex;
-    .left {
-      width: 35%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-    .right {
-      width: 65%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      display: flex;
-      align-items: center;
-    }
   }
+  /* Style the header, main, and footer elements */
+  .el-header {
+    height: 70px;
+    padding: 5px 0;
+    background-color: #d33a31;
+    color: #ffd4b9;
+    display: flex;
+    align-items: center;
+  }
+  .header-left {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .header-right {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Style the left and right panels */
   .el-aside {
-    // background-color: rgb(228, 231, 237);
-    max-height: calc(100vh - 200px);
-    background-color: transparent;
-    border-radius: 10px;
+    height: 100%;
+    border-right: 1px solid #cccccc;
+    max-height: calc(100vh - 160px);
   }
   .el-main {
-    // background-color: rgb(228, 231, 237);
-    background-color: white;
-    border-radius: 10px;
-    margin-left: 10px;
-    max-height: calc(100vh - 200px);
-    overflow: hidden;
-    padding: 0 10px;
+    // max-width: 1080px;
+    max-height: calc(100vh - 160px);
+    // background-color: #e8e8e8;
+    padding: 10px 10px 0 10px;
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 5px;
+      background-color: #cccccc; /* 滚动条背景颜色 */
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 5px;
+      background: #f1f1f1;
+      /* -webkit-box-shadow:inset 00 6px rgba(0,0,0,0.7); */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      /* -webkit-box-shadow:inset 00 6px rgba(0,0,0,.8); */
+      transition: 0.3s ease-in-out;
+      background-color: #cccccc; /* 滚动条颜色 */
+    }
   }
+
   .el-footer {
-    height: 100px;
-    background-color: rgb(252, 252, 252);
-    margin-top: 20px;
-    // position: fixed;
-    // bottom: 0;
-    border-radius: 10px;
-    z-index: 999;
+    width: 100%;
+    height: 90px;
+    background-color: #ffd4b9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #fff;
+    flex-shrink: 0; //粘性页脚
   }
   .el-popper {
     width: 365px;
     padding: 0 !important;
     height: 430px !important;
-    // .is-light {
-    //   border: 0 !important;
-    // }
   }
 </style>

@@ -11,7 +11,7 @@
 <style lang="less" scoped>
   //@import url(); 引入公共css类
   .logo {
-    width: 180px;
+    width: 200px;
     display: flex;
     align-items: center;
     padding-left: 20px;

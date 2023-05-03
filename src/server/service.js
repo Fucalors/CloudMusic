@@ -4,6 +4,7 @@ import axios from 'axios'
 // 创建axios实例
 const service = axios.create({
 	baseURL: '/api', // 使用代理服务器
+
 	timeout: 5000, // 请求超时时间
 	// params: params, // 对象
 	withCredentials: true, // 设置允许跨域

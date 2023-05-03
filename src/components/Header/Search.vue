@@ -1,80 +1,67 @@
 <template>
-  <div class="searchTip">
-    <el-popover placement="bottom" popper-class="tao" width="365" trigger="click">
+  <div class="searchbar">
+    <el-popover placement="top-start" :width="435" trigger="click">
       <template #reference>
         <el-input
-          placeholder="搜索"
+          v-model.trim="searchWords"
+          placeholder="Please input"
           :prefix-icon="Search"
-          v-model="searchWords"
-          @input="keyWordsChange"></el-input>
-        <!-- <el-input v-for="item in hotSearchs" key="item" :placeholder="item.first" :prefix-icon="Search"></el-input> -->
+          @input="keyWordsChange" />
       </template>
       <HotSearch v-if="!searchWords" />
-      <div class="history-tip" v-else>
-        <div class="history">
+      <div class="search-content" v-else="info.searchKey">
+        <div class="title-name">{{ historyTitle }}</div>
+        <!-- 歌曲 -->
+        <div class="song" v-if="info.searchKey">
           <div class="title">
-            {{ historyTitle }}
+            <el-icon><Headset /></el-icon>
+            <span>单曲</span>
           </div>
-          <div class="history-content">
-            <!-- <el-tag v-for="tag in searchWords" :key="tag" closable :type="tag.type">
-              {{ tag }}
-            </el-tag> -->
-          </div>
-        </div>
-        <div class="tip">
-          <!-- 歌曲 -->
-          <div class="songs" v-if="info.searchKey">
-            <div class="orders">
-              <el-icon>
-                <headset />
-              </el-icon>
-              单曲
-            </div>
-            <div class="songs-artists" v-for="item in info.searchKey.songs" :key="item">
-              <span class="songs-name">{{ item.name }}</span>
+          <div class="pops" v-if="info.searchKey.songs" v-for="item in info.searchKey.songs" :key="item">
+            <div class="pops-text">
+              <span>{{ item.name }}</span>
               <span class="line">一</span>
               <span class="artists-name" v-for="item1 in item.artists" :key="item1">{{ item1.name }}</span>
             </div>
           </div>
-          <!-- 歌单 -->
-          <div class="songs" v-if="info.searchKey">
-            <div class="orders">
-              <el-icon>
-                <headset />
-              </el-icon>
-              歌单
-            </div>
-            <div class="songs-artists" v-for="item in info.searchKey.playlists" :key="item">
-              <!-- <img :src="item.coverImgUrl" alt="" /> -->
-              <span class="songs-name">{{ item.name }}</span>
+        </div>
+        <!-- 歌单 -->
+        <div class="song" v-if="info.searchKey">
+          <div class="title">
+            <el-icon><Headset /></el-icon>
+            <span>歌单</span>
+          </div>
+          <div class="pops" v-if="info.searchKey.playlists" v-for="item in info.searchKey.playlists" :key="item">
+            <div class="pops-text">
+              <span>{{ item.name }}</span>
             </div>
           </div>
-          <!-- 专辑 -->
-          <div class="songs" v-if="info.searchKey">
-            <div class="orders">
-              <el-icon>
-                <headset />
-              </el-icon>
-              专辑
-            </div>
-            <div class="songs-artists" v-for="item in info.searchKey.albums" :key="item">
-              <span class="songs-name">{{ item.name }}</span>
+        </div>
+        <!-- 专辑 -->
+
+        <div class="song" v-if="info.searchKey">
+          <div class="title">
+            <el-icon><Headset /></el-icon>
+            <span>专辑</span>
+          </div>
+          <div class="pops" v-if="info.searchKey.albums" v-for="item in info.searchKey.albums" :key="item">
+            <div class="pops-text">
+              <span>{{ item.name }}</span>
               <span class="line">一</span>
-              <span class="artists-name">
-                {{ item.artist.name }}
-              </span>
+              <span class="artists-name">{{ item.artist.name }}</span>
             </div>
           </div>
-          <!-- 歌手 -->
-          <div class="songs" v-if="info.searchKey">
-            <div class="orders">
-              <el-icon>
-                <headset />
-              </el-icon>
-              歌手
-            </div>
-            <div class="songs-artists" v-for="item in info.searchKey.artists" :key="item">
-              <span class="songs-name">{{ item.name }}</span>
+        </div>
+
+        <!-- 歌手 -->
+        <div class="song" v-if="info.searchKey">
+          <div class="title">
+            <el-icon><Headset /></el-icon>
+            <span>歌手</span>
+          </div>
+          <div class="pops" v-if="info.searchKey.artists" v-for="item in info.searchKey.artists" :key="item">
+            <div class="pops-text">
+              <span>{{ item.name }}</span>
             </div>
           </div>
         </div>
@@ -82,13 +69,12 @@
     </el-popover>
   </div>
 </template>
-
 <script setup>
   import { Search, Headset } from '@element-plus/icons-vue'
   import { searchMultimatch } from '@/server/MainApi/main'
   import { ref, onMounted, reactive } from 'vue'
   const searchWords = ref('') // 定义变量 keyWords 用来保存搜索的关键字
-  const historyTitle = '搜索历史'
+  const historyTitle = '搜索内容'
   const info = reactive({
     searchKey: {}, // 搜索建议
     keyWorldHistory: [] //搜索历史列表
@@ -100,7 +86,7 @@
     try {
       let res = await searchMultimatch(searchWords.value)
       info.searchKey = res.data.result
-      console.log(res.data.result)
+      // console.log(res.data.result)
     } catch (error) {
       console.error(error.message)
     }
@@ -147,116 +133,34 @@
     //   : []
   })
 </script>
-
-<style lang="less" scoped>
-  .searchTip {
-    width: 365px;
-    :deep(.el-input) {
-      // height: 28px;
-      .el-input__wrapper {
-        // border-radius: 50px;
-        // background-color: #cfcfcf;
-        // box-shadow: none;
-        input {
-          color: rgb(149, 149, 149);
-          //   &::-webkit-input-placeholder {
-          //     color: rgba(255, 255, 255);
-          //   }
-          //   &:-moz-placeholder {
-          //     color: rgba(255, 255, 255);
-          //   }
-          //   &::-moz-placeholder {
-          //     color: rgba(255, 255, 255);
-          //   }
-          //   &:-ms-input-placeholder {
-          //     color: rgba(255, 255, 255);
-          //   }
-        }
-        .el-input__prefix {
-          color: rgb(128, 128, 128);
-        }
-      }
+<style lang="less" scope>
+  .searchbar {
+    width: 435px;
+    .search-content {
+      width: 100%;
+      height: 100%;
     }
   }
-  .history-tip {
-    width: 100%;
-    height: 430px;
-    border-radius: 4px;
-    // background-color: aquamarine;
-    overflow: auto;
-    &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-    }
-    .history {
-      width: 100%;
-      max-height: 130px;
-      //   background-color: rgb(124, 185, 205);
-      padding: 0 10px;
-      margin-bottom: 5px;
-      .title {
-        height: 20px;
-        padding-top: 3px;
-        margin-bottom: 7px;
-      }
-
-      .history-content {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .tip {
-      width: 100%;
-      padding-bottom: 2px;
-      //   height: 100%;
-      //   background-color: rgb(176, 201, 34);
-      .songs {
-        width: 100%;
-        // background-color: antiquewhite;
-        .orders {
-          background-color: #eee;
-          height: 35px;
-          display: flex;
-          align-items: center;
+  .el-input {
+    .el-input__wrapper {
+      border-radius: 50px;
+      //   border: 1px solid red;
+      box-shadow: none;
+      background-color: #9c1515;
+      input {
+        color: #fff;
+        &::-webkit-input-placeholder {
+          color: rgb(255, 255, 255);
         }
-        .songs-artists {
-          width: 100%;
-          height: 35px;
-          display: flex;
-          align-items: center;
-          padding: 0 10px;
-          cursor: pointer;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          &:hover {
-            background-color: #f0f0f4;
-          }
-          img {
-            width: 35px;
-            height: 35px;
-            border-radius: 2px;
-            object-fit: cover;
-            margin-right: 3px;
-          }
-          .songs-name {
-            margin-left: 1px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-          }
-          .line {
-            display: flex;
-            align-items: center;
-            font-size: 18px;
-            font-weight: 400;
-            margin: 0 5px;
-          }
-          .artists-name {
-            display: inline-block;
-            margin-right: 5px;
-          }
+        &:-ms-input-placeholder {
+          color: rgb(255, 255, 255);
         }
+        &::-moz-placeholder {
+          color: rgb(255, 255, 255);
+        }
+      }
+      .el-input__prefix {
+        color: #fff;
       }
     }
   }

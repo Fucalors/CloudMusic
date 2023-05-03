@@ -8,7 +8,7 @@
 
 <script setup>
   import { ref, onMounted } from 'vue'
-  import { songListTab } from '@/server/songList/songList.js'
+  //   import { songListTab } from '@/server/songList/songList.js'
   const listTab = ref([])
 
   const getSongListTab = async () => {

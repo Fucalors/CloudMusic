@@ -1,0 +1,71 @@
+.el-popover {
+  width: 100%;
+  padding: 0 !important;
+  height: 300px !important;
+  overflow-y: auto;
+}
+.el-popover::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #cccccc; /* 滚动条背景颜色 */
+  border-radius: 5px;
+}
+
+.el-popover::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: #f1f1f1;
+  /* -webkit-box-shadow:inset 00 6px rgba(0,0,0,0.7); */
+}
+
+.el-popover::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  /* -webkit-box-shadow:inset 00 6px rgba(0,0,0,.8); */
+  transition: 0.3s ease-in-out;
+  background-color: #cccccc; /* 滚动条颜色 */
+}
+
+.title-name {
+  font-size: 16px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 7px;
+  margin-bottom: 3px;
+}
+
+/* .song {
+  background-color: #c93636;
+} */
+.song .title {
+  background-color: #eee;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding-left: 7px;
+}
+
+.song .title span {
+  margin-left: 2px;
+}
+/* .pops {
+  background-color: aliceblue;
+} */
+.pops :hover {
+  background-color: #f5f5f5;
+}
+.pops .pops-text {
+  cursor: pointer;
+  line-height: 30px;
+  padding-left: 7px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pops .pops-text .line {
+  display: inline-block;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 5px;
+}

@@ -39,19 +39,26 @@ const router = createRouter({
 					path: '/mv',
 					name: 'mv',
 					component: () => import('../views/Home/Mv.vue'),
+				},
+				{
+					// 当 /user/:id/profile 匹配成功
+					// UserProfile 将被渲染到 User 的 <router-view> 内部
+					path: '/songListdetail',
+					name: 'songListdetail',
+					component: () => import('../views/Detail/SongListDetail.vue'),
 				}
 
 			]
 		},
-		// {
-		// 	path: '/login',
-		// 	name: 'login',
-		// 	// route level code-splitting
-		// 	// this generates a separate chunk (About.[hash].js) for this route
-		// 	// which is lazy-loaded when the route is visited.
-		// 	// component: resolve => reqire(['../views/Login.vue'],resolve) // 异步组件写法
-		// 	component: () => import('../components/Login/Login.vue')
-		// },
+		{
+			path: '/login',
+			name: 'login',
+			// route level code-splitting
+			// this generates a separate chunk (About.[hash].js) for this route
+			// which is lazy-loaded when the route is visited.
+			// component: resolve => reqire(['../views/Login.vue'],resolve) // 异步组件写法
+			component: () => import('../components/Login/Login.vue')
+		},
 		// {
 		// 	path: '/main',
 		// 	name: 'main',

@@ -45,7 +45,7 @@ export default defineConfig({
 		// 反向代理配置
 		proxy: {
 			'/api': {
-				target: "http://localhost:3000", // 产生垮域的地址
+				target: "http://localhost:3000", // 产生垮域的地址 https://api-production-8e68.up.railway.app/
 				changeOrigin: true,
 				ws: true,
 				rewrite: (path) => path.replace(/^\/api/, '')
