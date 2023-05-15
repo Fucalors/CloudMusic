@@ -23,6 +23,7 @@
 
     span {
       margin-top: -2px;
+      color: #eee;
     }
   }
 </style>

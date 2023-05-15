@@ -20,7 +20,7 @@
     // console.log(tab.props.label)
   }
   const songListInfo = ref({})
-  const comment = ref({})
+  //   const comment = ref({})
 
   let id = useRoute().query.id // 歌单 id
   const getSongListInfo = async () => {
@@ -29,7 +29,7 @@
       let res = await getSongList(id)
       let comment = await getSongListComment(id)
       songListInfo.value = res.data.playlist
-      comment.value = res.playlist
+      //   comment.value = res.playlist
       //   console.log(res.data)
     } catch (error) {
       console.error(error.message)

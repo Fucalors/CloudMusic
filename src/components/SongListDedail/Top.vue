@@ -10,7 +10,9 @@
       </div>
       <div class="avatar">
         <img :src="songListInfo.creator.avatarUrl" alt="" srcset="" />
-        <span class="avatar-name">{{ songListInfo.creator.nickname }}</span>
+        <span class="avatar-name" @click="toUserDetails(songListInfo.userId)">
+          {{ songListInfo.creator.nickname }}
+        </span>
         <span class="create-time">创建时间: {{ convertTimestampToDateString(songListInfo.createTime) }}</span>
         <span class="create-time" style="margin-left: 10px">
           更新时间: {{ convertTimestampToDateString(songListInfo.trackUpdateTime) }}
@@ -54,8 +56,18 @@
 </template>
 
 <script setup>
+  import { useRouter } from 'vue-router'
   import { convertTimestampToDateString, playCount } from '@/plugins/index' // 时间戳转换格式化函数
+  // 定义变量 router 用来操作路由
+  const router = useRouter()
   const props = defineProps(['songListInfo'])
+  // 实现跳转到用户详细页面的方法
+  const toUserDetails = (id) => {
+    router.push({
+      name: 'userdetail',
+      query: { id: id }
+    })
+  }
 </script>
 
 <style lang="less" scoped>

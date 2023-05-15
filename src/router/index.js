@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import HomeView from '../views/Home/Index.vue'
+// import { useCounterStore } from '@/stores/counter.js'
+// const loginStore = useCounterStore() //改变登录状态
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,11 +45,10 @@ const router = createRouter({
 				{
 					// 当 /user/:id/profile 匹配成功
 					// UserProfile 将被渲染到 User 的 <router-view> 内部
-					path: '/songListdetail',
-					name: 'songListdetail',
-					component: () => import('../views/Detail/SongListDetail.vue'),
-				}
-
+					path: '/songlistdetail',
+					name: 'songlistdetail',
+					component: () => import('../views/Details/SongListDetail.vue'),
+				},
 			]
 		},
 		{
@@ -59,16 +60,29 @@ const router = createRouter({
 			// component: resolve => reqire(['../views/Login.vue'],resolve) // 异步组件写法
 			component: () => import('../components/Login/Login.vue')
 		},
-		// {
-		// 	path: '/main',
-		// 	name: 'main',
-		// 	component: () => import('../components/Main/Main.vue')
-		// },
+		{   //用户详情页
+			path: '/userdetail',
+			name: 'userdetail',
+			component: () => import('../views/Details/UserDetail.vue'),
+			// props($route) {
+			// 	return {
+			// 		id: $route.params.id,
+			// 	}
+			// },
+		},
 		{   //404页面
 			path: '/:pathMatch(.*)*',
 			name: 'NotFound',
-			component: import('../views/404/NotFound.vue')
+			component: () => import('../views/404/NotFound.vue')
 		},
 	]
 })
+// 路由守卫
+// router.beforeEach((to, from) => {
+// 	if (to.path == '/login') {
+// 		loginStore.$state.loginState = true
+// 	} else {
+// 		// store.state.isFooterMusic = true
+// 	}
+// })
 export default router

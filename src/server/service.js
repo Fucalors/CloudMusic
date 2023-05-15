@@ -51,10 +51,16 @@ const errorHandle = (status, errorInfo) => {
 service.interceptors.request.use(
 	config => {
 		// 在请求发送之前做一些处理
-		// const token = localStorage.getItem('token')
-		// if (token) {
-		//     config.headers.Authorization = token
-		// }
+		const cookie = localStorage.getItem('cookie')
+
+		if (cookie) {
+			config.headers.Authorization = cookie
+		}
+		const token = localStorage.getItem('token')
+		if (token) {
+			config.headers.Authorization = token
+		}
+
 		if (config.method === 'POST') {  //提前处理POST请求
 			config.data = queryString.stringify(config.data)
 		}

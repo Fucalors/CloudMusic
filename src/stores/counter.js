@@ -4,33 +4,22 @@ import { getLoginEmail } from '@/server/Login/login.js'
 
 export const useCounterStore = defineStore('counter', {
 	state: () => ({
-		isLogin: false, //判断是否登录
-		token: "", //登录token
-		user: {}, //用户数据
-
+		loginState: false,//登录状态 loginStore.$state.isLogin = true // 调用值为loginState的状态true
 	}),
 
 	getters: {
 	},
 	actions: {
-		//异步登录
-		getLogin: async function (context, value) {
-			let res = await getLoginEmail(value)
-			console.log(res)
-			return res
-		},
 
 	},
 	mutations: {
-		updateIsLogin: function (state, value) {
-			state.isLogin = true
+		updateLoginState: function (state, value) {
+			// loginStore.$state.updateLoginState = true // 调用值为true的changeLoginState突变true
+			state.isLogin = value
 		},
-		updateToken: function (state, value) {
-			state.token = value
-			localStorage.setItem('token', state.token)
-		},
-		updateUser: function (state, value) {
-			state.user = value
+		changeLoginState: function (state, value) { //登录状态
+			state.loginState = value || false
+			// loginStore.$state.changeLoginState = true // 调用值为true的changeLoginState突变true
 		},
 	},
 

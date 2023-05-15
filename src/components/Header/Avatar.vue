@@ -5,7 +5,7 @@
     </el-avatar>
   </div>
   <!-- 登录 -->
-  <el-dialog v-model="centerDialogVisible" title="网易云音乐" width="30%" center>
+  <el-dialog v-model="centerDialogVisible" title="网易云音乐" width="35%" center>
     <Login />
   </el-dialog>
 </template>

@@ -15,7 +15,7 @@
 
 <script setup>
   //import  from '';
-  import { recommendMv } from '@/server/MainApi/main'
+  import { recommendMv } from '@/server/Main/main'
   import { ref, onMounted } from 'vue'
 
   const recommend = ref([]) // 推荐MV

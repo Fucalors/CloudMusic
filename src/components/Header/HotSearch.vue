@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title" v-if="dataLoaded">
-      <h3>{{ hotTitle }}</h3>
+      <span>{{ hotTitle }}</span>
       <img :src="hotIcon" alt="hot" />
     </div>
     <div class="content" v-for="(item, index) in hotSearch" :key="item" :class="{ winner: index - 2 <= 0 }">
@@ -20,7 +20,7 @@
 <script setup>
   //import  from '';
   import { ref, onMounted } from 'vue'
-  import { hotSearchDetail } from '@/server/MainApi/main'
+  import { hotSearchDetail } from '@/server/Main/main'
   const hotSearch = ref([])
   const hotIcon = ref('') //Hot图片
   const hotTitle = '热搜榜' //标题
@@ -48,35 +48,32 @@
   //@import url(); 引入公共css类
   .container {
     width: 100%;
-    padding-bottom: 2px;
-    // height: 100%;
-    // background-color: red;
-    height: 430px;
+    // padding-bottom: 2px;
+    height: 300px;
     overflow: auto;
-    &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-    }
     .title {
       width: 100%;
       height: 25px;
       display: flex;
       align-items: center;
-      padding: 10px;
-      h3 {
+
+      padding: 5px 7px;
+
+      span {
         display: inline-block;
         margin-right: 2px;
+        font-size: 15px;
+        font-weight: bold;
       }
       img {
         width: auto;
-        height: 25px;
-        max-height: 25px;
+        // height: 25px;
+        // max-height: 25px;
       }
     }
     .content {
       width: 100%;
       height: 55px;
-      //   background-color: white;
       padding: 5px 0;
       display: flex;
       cursor: pointer;

@@ -28,9 +28,9 @@
       align-items: center;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
-      color: #b0b0b0;
+      color: #eee;
       &:hover {
-        color: #868686;
+        color: #dcdcdc;
       }
     }
     .left::before {

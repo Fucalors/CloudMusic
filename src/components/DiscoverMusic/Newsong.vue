@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-  import { newSong } from '@/server/MainApi/main'
+  import { newSong } from '@/server/Main/main'
   import { convertMsToMinSec } from '@/plugins/index.js' // 歌曲时间函数
   import { ref, onMounted } from 'vue'
 

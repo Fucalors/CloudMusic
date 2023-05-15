@@ -26,7 +26,7 @@
 
 <script setup>
   import { VideoPlay } from '@element-plus/icons-vue'
-  import { dailySongList } from '@/server/MainApi/main'
+  import { dailySongList } from '@/server/Main/main'
   import { playCount } from '@/plugins/index.js'
   import { ref, onMounted } from 'vue'
 

@@ -14,7 +14,7 @@
 
 <script setup>
   //import  from '';
-  import { privateContent } from '@/server/MainApi/main'
+  import { privateContent } from '@/server/Main/main'
   import { ref, onMounted } from 'vue'
 
   const sole = ref([]) // 独家放送

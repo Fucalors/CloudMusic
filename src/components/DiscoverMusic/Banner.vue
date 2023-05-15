@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  import { banner } from '@/server/MainApi/main'
+  import { banner } from '@/server/Main/main'
   import { ref, onMounted } from 'vue'
 
   const bannerImg = ref([]) //图片加载

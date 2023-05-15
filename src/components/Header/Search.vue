@@ -1,19 +1,19 @@
 <template>
   <div class="searchbar">
-    <el-popover placement="top-start" :width="435" trigger="click">
+    <el-popover placement="bottom" :width="450" trigger="click" popper-class="popper">
       <template #reference>
         <el-input
           v-model.trim="searchWords"
-          placeholder="Please input"
-          :prefix-icon="Search"
-          @input="keyWordsChange" />
+          @input="keyWordsChange"
+          @keyup.enter.native="keyWordsChange"
+          placeholder="歌名/人名"
+          :prefix-icon="Search" />
       </template>
       <HotSearch v-if="!searchWords" />
-      <div class="search-content" v-else="info.searchKey">
-        <div class="title-name">{{ historyTitle }}</div>
-        <!-- 歌曲 -->
+      <div class="hot-search" v-else>
+        <div class="top-title">热门搜索</div>
         <div class="song" v-if="info.searchKey">
-          <div class="title">
+          <div class="title" v-if="info.searchKey.songs">
             <el-icon><Headset /></el-icon>
             <span>单曲</span>
           </div>
@@ -27,7 +27,7 @@
         </div>
         <!-- 歌单 -->
         <div class="song" v-if="info.searchKey">
-          <div class="title">
+          <div class="title" v-if="info.searchKey.playlists">
             <el-icon><Headset /></el-icon>
             <span>歌单</span>
           </div>
@@ -40,7 +40,7 @@
         <!-- 专辑 -->
 
         <div class="song" v-if="info.searchKey">
-          <div class="title">
+          <div class="title" v-if="info.searchKey.albums">
             <el-icon><Headset /></el-icon>
             <span>专辑</span>
           </div>
@@ -55,7 +55,7 @@
 
         <!-- 歌手 -->
         <div class="song" v-if="info.searchKey">
-          <div class="title">
+          <div class="title" v-if="info.searchKey.artists">
             <el-icon><Headset /></el-icon>
             <span>歌手</span>
           </div>
@@ -71,10 +71,11 @@
 </template>
 <script setup>
   import { Search, Headset } from '@element-plus/icons-vue'
-  import { searchMultimatch } from '@/server/MainApi/main'
+  import { searchMultimatch } from '@/server/Main/main'
   import { ref, onMounted, reactive } from 'vue'
   const searchWords = ref('') // 定义变量 keyWords 用来保存搜索的关键字
   const historyTitle = '搜索内容'
+  const popoverVisible = ref(false)
   const info = reactive({
     searchKey: {}, // 搜索建议
     keyWorldHistory: [] //搜索历史列表
@@ -126,7 +127,7 @@
   //     }
   //   }
   onMounted(() => {
-    getSearchMultimatch()
+    // getSearchMultimatch()
     // 取出本地保存的记录
     // searchWords.value = JSON.parse(localStorage.getItem('searchWords'))
     //   ? JSON.parse(localStorage.getItem('searchWords'))
@@ -135,33 +136,51 @@
 </script>
 <style lang="less" scope>
   .searchbar {
-    width: 435px;
-    .search-content {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .el-input {
-    .el-input__wrapper {
-      border-radius: 50px;
-      //   border: 1px solid red;
-      box-shadow: none;
-      background-color: #9c1515;
-      input {
-        color: #fff;
-        &::-webkit-input-placeholder {
-          color: rgb(255, 255, 255);
-        }
-        &:-ms-input-placeholder {
-          color: rgb(255, 255, 255);
-        }
-        &::-moz-placeholder {
-          color: rgb(255, 255, 255);
+    width: 450px;
+    .el-input {
+      .el-input__wrapper {
+        border-radius: 50px;
+        background-color: #9c1515;
+        box-shadow: none;
+        // &:hover {
+        //   box-shadow: #eee;
+        // }
+        .el-input__inner {
+          //   background-color: #9c1515;
+          color: #eee;
+          &:focus {
+            outline: 0;
+          }
         }
       }
       .el-input__prefix {
-        color: #fff;
+        .el-input__prefix-inner {
+          color: #eee;
+        }
       }
     }
   }
+  //   .el-input {
+  //     .el-input__wrapper {
+  //       border-radius: 50px;
+  //       //   border: 1px solid red;
+  //       box-shadow: none;
+  //       background-color: #9c1515;
+  //       input {
+  //         color: #d33333;
+  //         &::-webkit-input-placeholder {
+  //           color: rgb(38, 14, 214);
+  //         }
+  //         &:-ms-input-placeholder {
+  //           color: rgb(170, 115, 115);
+  //         }
+  //         &::-moz-placeholder {
+  //           color: rgb(225, 41, 41);
+  //         }
+  //       }
+  //       .el-input__prefix {
+  //         color: #e22222;
+  //       }
+  //     }
+  //   }
 </style>

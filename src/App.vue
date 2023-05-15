@@ -20,7 +20,7 @@
           </el-main>
         </el-container>
       </el-container>
-      <el-footer>Footer</el-footer>
+      <el-footer><Footer /></el-footer>
     </el-container>
   </div>
 </template>
@@ -106,7 +106,6 @@
     background-color: #ffd4b9;
     display: flex;
     align-items: center;
-    justify-content: center;
     position: fixed;
     bottom: 0;
     border-top: 1px solid #fff;
