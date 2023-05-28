@@ -1,6 +1,10 @@
 @import './base.css';
 /* @import './popover.css'; */
 @import './pos.css';
+.el-slider_button{ /*进度条圆圈大小*/
+width: 15px !important;
+  height:15px !important;
+}
 .box::-webkit-scrollbar {
   width: 6px;
   height: 6px;

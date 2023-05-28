@@ -1,35 +1,57 @@
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-header>
-        <div class="header-left">
-          <Logo />
-          <Arrow />
-        </div>
-        <div class="header-right">
-          <Search />
-          <Avatar />
-          <Time />
-        </div>
-      </el-header>
+  <el-config-provider :locale="zhCn">
+    <div class="common-layout">
       <el-container>
-        <el-aside width="200px"><AsideMenu /></el-aside>
+        <el-header>
+          <div class="header-left">
+            <Logo />
+            <Arrow />
+          </div>
+          <div class="header-right">
+            <Search />
+            <Avatar />
+            <Time />
+          </div>
+        </el-header>
         <el-container>
-          <el-main>
-            <RouterView></RouterView>
-          </el-main>
+          <el-aside width="200px"><AsideMenu /></el-aside>
+          <el-container>
+            <el-main>
+              <RouterView></RouterView>
+            </el-main>
+          </el-container>
         </el-container>
+        <el-footer><Footer /></el-footer>
       </el-container>
-      <el-footer><Footer /></el-footer>
-    </el-container>
-  </div>
+    </div>
+  </el-config-provider>
 </template>
 <script setup>
+  import zhCn from 'element-plus/dist/locale/zh-cn.mjs' // 国际化
+  import { useUserStore } from '@/stores/modules/userStore.js' //获取pinia useUserStore信息
+  import {  getLoginStatus } from '@/server/Login/login'
+  import {getCurrentInstance, onMounted, version} from 'vue' //  暴露当前所使用的 Vue 版本。
+  console.log('Vue版本号:' + version)
   // import { RouterView } from 'vue-router'
   //   import { getCurrentInstance } from 'vue'
   //   let app = getCurrentInstance()
   //   console.log(app)
   //   console.log(app.appContext.app.config.globalProperties.$loading)
+  //自动登录
+
+  const loginStatus=useUserStore()
+  const cookie = localStorage.getItem('cookie')
+  const token = localStorage.getItem('token')
+  const login = async () =>{
+    let Status = await getLoginStatus(cookie) // 获取登录状态(cookie)
+    console.log(Status)
+  }
+  if (cookie || token){
+      login()
+      loginStatus.changeLoginState(true)
+  }else{
+    loginStatus.changeLoginState(false)
+  }
 </script>
 
 <style lang="less">

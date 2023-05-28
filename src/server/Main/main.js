@@ -143,3 +143,18 @@ export const userPlaylist = (id) => {
 		methods: 'GET'
 	})
 }
+
+//获取音频的url
+export const getSongUrl = (id) => {
+	return service({
+		url: `/song/url?id=${id}`,
+		method: 'GET',
+	})
+}
+//获取歌曲详情
+export const getSongDetail = (id) => {
+	return service({
+		url: `/song/detail?ids=${id}`,
+		method: 'GET',
+	})
+}

@@ -1,18 +1,18 @@
 <template>
-  <div class="title" v-if="!songList.value">
+  <div v-if="!songList.value" class="title">
     <span>{{ songListTitle }}</span>
   </div>
   <div class="content">
-    <div class="songlist" v-for="item in songList" :key="item">
+    <div v-for="item in songList" :key="item" class="songlist">
       <router-link :to="{ path: '/SongListDetail', query: { id: item.id } }">
-        <el-card class="card" :body-style="{ padding: '0px' }" shadow="hover">
+        <el-card :body-style="{ padding: '0px' }" class="card" shadow="hover">
           <span class="playNum">
             <el-icon>
               <VideoPlay />
             </el-icon>
             {{ playCount(item.playCount) }}
           </span>
-          <img class="image card-img" :src="item.picUrl" :alt="item.name" />
+          <img :alt="item.name" :src="item.picUrl" class="image card-img" />
           <div class="content-name">
             <span class="content-style">
               {{ item.name }}
@@ -39,7 +39,7 @@
       let res = await dailySongList()
       songList.value = res.data.result
 
-      //   console.log(res.data)
+        // console.log(res)
     } catch (error) {
       //处理错误逻辑
       // console.log('获取Banner数据失败: ' + error.response.statusText + ': ' + error.message)

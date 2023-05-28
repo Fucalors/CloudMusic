@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-  //import  from '';
+  //   import { useOverallStore } from '@/stores/overallStore.js'
 </script>
 
 <style lang="less" scoped>

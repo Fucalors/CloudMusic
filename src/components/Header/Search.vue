@@ -1,37 +1,37 @@
 <template>
   <div class="searchbar">
-    <el-popover placement="bottom" :width="450" trigger="click" popper-class="popper">
+    <el-popover :width="450" placement="bottom" popper-class="popper" trigger="click">
       <template #reference>
         <el-input
           v-model.trim="searchWords"
-          @input="keyWordsChange"
-          @keyup.enter.native="keyWordsChange"
+          :prefix-icon="Search"
           placeholder="歌名/人名"
-          :prefix-icon="Search" />
+          @input="keyWordsChange"
+          @keyup.enter.native="keyWordsChange" />
       </template>
       <HotSearch v-if="!searchWords" />
-      <div class="hot-search" v-else>
+      <div v-else class="hot-search">
         <div class="top-title">热门搜索</div>
-        <div class="song" v-if="info.searchKey">
-          <div class="title" v-if="info.searchKey.songs">
+        <div v-if="info.searchKey" class="song">
+          <div v-if="info.searchKey.songs" class="title">
             <el-icon><Headset /></el-icon>
             <span>单曲</span>
           </div>
-          <div class="pops" v-if="info.searchKey.songs" v-for="item in info.searchKey.songs" :key="item">
+          <div v-for="item in info.searchKey.songs" v-if="info.searchKey.songs" :key="item" class="pops">
             <div class="pops-text">
               <span>{{ item.name }}</span>
               <span class="line">一</span>
-              <span class="artists-name" v-for="item1 in item.artists" :key="item1">{{ item1.name }}</span>
+              <span v-for="item1 in item.artists" :key="item1" class="artists-name">{{ item1.name }}</span>
             </div>
           </div>
         </div>
         <!-- 歌单 -->
-        <div class="song" v-if="info.searchKey">
-          <div class="title" v-if="info.searchKey.playlists">
+        <div v-if="info.searchKey" class="song">
+          <div v-if="info.searchKey.playlists" class="title">
             <el-icon><Headset /></el-icon>
             <span>歌单</span>
           </div>
-          <div class="pops" v-if="info.searchKey.playlists" v-for="item in info.searchKey.playlists" :key="item">
+          <div v-for="item in info.searchKey.playlists" v-if="info.searchKey.playlists" :key="item" class="pops">
             <div class="pops-text">
               <span>{{ item.name }}</span>
             </div>
@@ -39,12 +39,12 @@
         </div>
         <!-- 专辑 -->
 
-        <div class="song" v-if="info.searchKey">
-          <div class="title" v-if="info.searchKey.albums">
+        <div v-if="info.searchKey" class="song">
+          <div v-if="info.searchKey.albums" class="title">
             <el-icon><Headset /></el-icon>
             <span>专辑</span>
           </div>
-          <div class="pops" v-if="info.searchKey.albums" v-for="item in info.searchKey.albums" :key="item">
+          <div v-for="item in info.searchKey.albums" v-if="info.searchKey.albums" :key="item" class="pops">
             <div class="pops-text">
               <span>{{ item.name }}</span>
               <span class="line">一</span>
@@ -54,12 +54,12 @@
         </div>
 
         <!-- 歌手 -->
-        <div class="song" v-if="info.searchKey">
-          <div class="title" v-if="info.searchKey.artists">
+        <div v-if="info.searchKey" class="song">
+          <div v-if="info.searchKey.artists" class="title">
             <el-icon><Headset /></el-icon>
             <span>歌手</span>
           </div>
-          <div class="pops" v-if="info.searchKey.artists" v-for="item in info.searchKey.artists" :key="item">
+          <div v-for="item in info.searchKey.artists" v-if="info.searchKey.artists" :key="item" class="pops">
             <div class="pops-text">
               <span>{{ item.name }}</span>
             </div>
@@ -74,29 +74,35 @@
   import { searchMultimatch } from '@/server/Main/main'
   import { ref, onMounted, reactive } from 'vue'
   const searchWords = ref('') // 定义变量 keyWords 用来保存搜索的关键字
+  // 定义一个变量，存储搜索历史的标题
   const historyTitle = '搜索内容'
+  // 定义一个响应式变量，存储弹出层的显示状态
   const popoverVisible = ref(false)
+  // 定义一个响应式对象，存储搜索建议和搜索历史列表
   const info = reactive({
     searchKey: {}, // 搜索建议
     keyWorldHistory: [] //搜索历史列表
   })
-  // 定义定时器
+  // 定义一个定时器变量
   let time
-  //搜索功能
+  // 定义一个异步函数，用于获取搜索建议
   const getSearchMultimatch = async () => {
     try {
+      // 调用搜索建议的 API
       let res = await searchMultimatch(searchWords.value)
+      // 将搜索建议保存到响应式对象中
       info.searchKey = res.data.result
       // console.log(res.data.result)
     } catch (error) {
       console.error(error.message)
     }
   }
-  // 定义搜索关键词变化的函数
+  // 定义一个函数，用于监听搜索关键词的变化
   const keyWordsChange = () => {
     // 清空定时器
     clearTimeout(time)
     if (searchWords.value !== '') {
+      // 设置定时器，延迟100ms后调用getSearchMultimatch函数获取搜索建议
       time = setTimeout(() => {
         getSearchMultimatch(searchWords.value)
       }, 100)

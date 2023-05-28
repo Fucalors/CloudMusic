@@ -6,7 +6,7 @@
     <div class="content">
       <div class="musicList" v-for="item in newMusic" :key="item">
         <img :src="item.picUrl" alt="" />
-        <div class="names">
+        <div class="names" @dblclick="playMusic">
           <div class="musicName">
             <span>{{ item.song.name }}</span>
             <span v-for="alias in item.song.alias" :key="alias">{{ alias }}</span>
@@ -22,10 +22,12 @@
 </template>
 
 <script setup>
-  import { newSong } from '@/server/Main/main'
+  import { newSong, getSongUrl } from '@/server/Main/main'
+  import { getSongListTrack } from '@/server/SongList/songList'
   import { convertMsToMinSec } from '@/plugins/index.js' // 歌曲时间函数
   import { ref, onMounted } from 'vue'
-
+  //   import { useMusicStore } from '@/stores/modules/musicStore.js'
+  //   const music = useMusicStore() //获取pinia信息
   const newMusic = ref([]) //推荐新音乐
   const newSongTitle = '推荐新音乐' //标题
 
@@ -34,13 +36,26 @@
       //处理数据逻辑
       let res = await newSong()
       newMusic.value = res.data.result
-      // console.log(res.data)
+      //   let songs = await getSongListTrack()
+      //   music.playList = res.data.result //改变pinia的值 实现播放歌单里的音乐
+      //   console.log(res.data)
+      //   console.log(songs.data.songs)
     } catch (error) {
       //处理错误逻辑
       // console.log('获取Banner数据失败: ' + error.response.statusText + ': ' + error.message)
       console.error(error.message)
     }
   }
+  //   const musicUrl = async () => {
+  //     try {
+  //       //处理数据逻辑
+  //       let res = await getSongUrl(2047807671)
+  //       console.log(res.data)
+  //     } catch (error) {
+  //       //处理错误逻辑
+  //       console.error(error.message)
+  //     }
+  //   }
 
   onMounted(() => {
     getRecommendNewMusic()

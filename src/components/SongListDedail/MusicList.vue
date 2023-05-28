@@ -12,10 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          style="height: 40px; border-bottom;: 1px solid #ccc"
-          v-for="(item, i) in props.songList.tracks"
-          :key="i">
+        <tr style="height: 40px; border-bottom: 1px solid #ccc;cursor: pointer" v-for="(item, i) in props.songList" :key="i" @dblclick="playSong(i)">
           <td class="serial">{{ i + 1 }}</td>
           <td class="song-name">{{ item.name }}</td>
           <td class="avatar">
@@ -43,6 +40,8 @@
 
 <script setup>
   import { convertMsToMinSec } from '@/plugins/index.js' // 歌曲时间函数
+  import { useMusicStore } from '@/stores/modules/musicStore.js'
+  const musicStore = useMusicStore() //获取pinia useMusicStore信息
   const props = defineProps({
     songList: {
       type: Object,
@@ -51,6 +50,11 @@
       }
     }
   })
+    // console.log(props)
+
+  const playSong = (index) => {// 定义双击播放歌曲的方法
+    musicStore.changePlayListIndex(index)
+  }
 </script>
 
 <style lang="less" scoped>
@@ -62,11 +66,12 @@
       border-collapse: collapse;
       width: 100%;
       text-align: left;
+      cursor: pointer;
       tr:nth-child(odd) {
         background-color: rgb(245, 245, 245);
       }
       tr:hover {
-        background-color: rgb(240, 240, 240);
+        background-color: rgb(230, 230, 230);
       }
       .serial {
         width: 55px;

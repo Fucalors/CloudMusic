@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import HomeView from '../views/Home/Index.vue'
-// import { useCounterStore } from '@/stores/counter.js'
-// const loginStore = useCounterStore() //改变登录状态
+// import { useOverallStore } from '@/stores/overallStore.js'
+// const loginStore = useOverallStore() //改变登录状态
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
