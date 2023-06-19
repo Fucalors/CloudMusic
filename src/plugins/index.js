@@ -89,15 +89,17 @@ export const validatePhoneNumber = (phoneNumber) => {
 const debouncedFunction = debounce(myFunction, 1000);
 debouncedFunction(); // logs 'Hello, world!' after 1 second
  */
+// 防抖函数
 export const debounce = (func, delay) => {
-	let timeoutId;
+	let timeout;
 	return function (...args) {
-		clearTimeout(timeoutId);
-		timeoutId = setTimeout(() => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => {
 			func.apply(this, args);
 		}, delay);
 	};
 }
+
 
 /**
  * 

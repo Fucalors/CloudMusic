@@ -79,12 +79,12 @@ service.interceptors.response.use(
 		// 		break;
 		// }
 		// 提示错误信息
-		ElMessage({
-			type: 'error',
-			grouping: true, //分组归类
-			showClose: true, //支持关闭
-			message: error.message
-		})
+		// ElMessage({
+		// 	type: 'error',
+		// 	grouping: true, //分组归类
+		// 	showClose: true, //支持关闭
+		// 	message: error.message
+		// })
 		return Promise.reject(error)
 	}
 )

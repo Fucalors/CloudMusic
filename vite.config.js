@@ -8,15 +8,14 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-
+console.log(import.meta.url)
 // https://vitejs.dev/config/
 export default defineConfig({
 
-	plugins: [vue(),
+	plugins: [
+		vue(),
 	AutoImport({
-		resolvers: [ElementPlusResolver()],
-		// imports: ['vue-router', 'pinia'],
-	}),
+		resolvers: [ElementPlusResolver()],}),
 	Components({
 		resolvers: [ElementPlusResolver()],
 	}),

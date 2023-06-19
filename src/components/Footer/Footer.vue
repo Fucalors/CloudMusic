@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-  import { reactive, ref,toRefs, computed, onMounted, watchEffect, watch } from 'vue'
+  import { reactive, ref, toRefs, computed, onMounted, watchEffect, watch } from 'vue'
   import { convertMsToMinSec } from '@/plugins/index.js' //秒转分
   import { useMusicStore } from '@/stores/modules/musicStore.js'
   import { getSongUrl, getSongDetail } from '@/server/Main/main'
@@ -67,7 +67,8 @@
   // 播放监听
   const play = () => {
     // 判断播放还是暂停
-    if (audio.value.paused) { // 如果音频是暂停状态
+    if (audio.value.paused) {
+      // 如果音频是暂停状态
       audio.value.play() // 播放音频
       duration.value = audio.value.duration // 设置音频总时长
       setInterval(() => {
@@ -76,7 +77,8 @@
       }, 1000) // 每隔一秒钟更新一次
       musicStore.changeMusicPlayState(true) // 改变音乐播放状态为播放中
       musicStore.changePlayShow(false) // 改变Pinia的值，显示为播放按钮
-    } else { // 如果音频正在播放
+    } else {
+      // 如果音频正在播放
       audio.value.pause() // 暂停音频播放
       musicStore.changeMusicPlayState(false) // 改变音乐播放状态为暂停
       musicStore.changePlayShow(true) // 改变Pinia的值，显示为暂停按钮
@@ -84,33 +86,34 @@
   }
   const next = () => {
     // 下一首
-    musicStore.playListIndex++  // 播放列表索引加1
-    audio.value.autoplay = true  // 设置自动播放
-    musicStore.changeMusicPlayState(true)  // 改变音乐播放状态
-    if (musicStore.playListIndex == musicStore.playList.length) {  // 如果播放列表索引等于播放列表长度
-      musicStore.playListIndex = 0  // 将播放列表索引重置为0
+    musicStore.playListIndex++ // 播放列表索引加1
+    audio.value.autoplay = true // 设置自动播放
+    musicStore.changeMusicPlayState(true) // 改变音乐播放状态
+    if (musicStore.playListIndex == musicStore.playList.length) {
+      // 如果播放列表索引等于播放列表长度
+      musicStore.playListIndex = 0 // 将播放列表索引重置为0
     }
   }
   const prev = () => {
     // 上一首
-    musicStore.playListIndex--  // 播放列表索引减1
-    audio.value.autoplay = true  // 设置自动播放
-    musicStore.changeMusicPlayState(true)  // 改变音乐播放状态
-    if (musicStore.playListIndex < 0) {  // 如果播放列表索引小于0
-      musicStore.playListIndex = musicStore.playList.length - 1  // 将播放列表索引重置为播放列表长度减1
+    musicStore.playListIndex-- // 播放列表索引减1
+    audio.value.autoplay = true // 设置自动播放
+    musicStore.changeMusicPlayState(true) // 改变音乐播放状态
+    if (musicStore.playListIndex < 0) {
+      // 如果播放列表索引小于0
+      musicStore.playListIndex = musicStore.playList.length - 1 // 将播放列表索引重置为播放列表长度减1
     }
   }
   // 监视播放状态
   watchEffect(() => {
     if (musicStore.playListIndex) {
-      musicStore.changePlayShow(false)  // 如果播放列表索引不为0，则改变pinia的值显示为播放按钮
+      musicStore.changePlayShow(false) // 如果播放列表索引不为0，则改变pinia的值显示为播放按钮
     }
     if (musicIndex !== musicStore.playListIndex) {
       // 双击播放
-      audio.value.autoplay = true  // 设置自动播放
+      audio.value.autoplay = true // 设置自动播放
     }
   })
-
 
   //   const getmusics = async () => {
   //     let res = await getSongUrl(33894312)
@@ -125,7 +128,7 @@
     // getmusics()
     // getsong()
     if (audio.value.paused) {
-      musicStore.changePlayShow(true)//改变pinia的值显示为播放按钮
+      musicStore.changePlayShow(true) //改变pinia的值显示为播放按钮
     }
   })
 </script>
